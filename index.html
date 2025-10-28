@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <title>Study Reels - Video Revision Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-content">
+            <div class="welcome-icon">📚</div>
+            <h1>Study Reels</h1>
+            <p class="welcome-subtitle">Revise smarter with short-form video content</p>
+            <p class="welcome-description">
+                Transform your study sessions! Load your short study videos (≤60 seconds) 
+                and experience them in an engaging, swipeable format.
+            </p>
+            <button id="loadVideosBtn" class="btn-primary">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Load My Study Videos
+            </button>
+            <p class="browser-note">💡 Best experience on Chrome or Edge browsers</p>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Analyzing Videos...</h2>
+            <p id="loadingStatus">Scanning folder...</p>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <p id="progressText" class="progress-text">0%</p>
+        </div>
+    </div>
+
+    <!-- Error Screen -->
+    <div id="errorScreen" class="error-screen hidden">
+        <div class="error-content">
+            <div class="error-icon">⚠️</div>
+            <h2 id="errorTitle">Oops!</h2>
+            <p id="errorMessage"></p>
+            <button id="retryBtn" class="btn-primary">Try Again</button>
+        </div>
+    </div>
+
+    <!-- Video Player Screen -->
+    <div id="playerScreen" class="player-screen hidden">
+        <!-- Video Container -->
+        <div id="videoContainer" class="video-container">
+            <video id="currentVideo" class="video-player" playsinline></video>
+            <video id="nextVideo" class="video-player video-preload" playsinline></video>
+        </div>
+
+        <!-- Tap Overlay for Play/Pause -->
+        <div id="tapOverlay" class="tap-overlay"></div>
+
+        <!-- Side Controls -->
+        <div class="side-controls">
+            <button id="playPauseBtn" class="control-btn" aria-label="Play/Pause">
+                <svg id="playIcon" class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <svg id="pauseIcon" class="icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+            </button>
+
+            <button id="muteBtn" class="control-btn" aria-label="Mute/Unmute">
+                <svg id="muteIcon" class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+                    <line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2"></line>
+                    <line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2"></line>
+                </svg>
+                <svg id="unmuteIcon" class="icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" stroke-width="2" fill="none"></path>
+                </svg>
+            </button>
+
+            <div class="video-counter">
+                <div class="counter-icon">🎬</div>
+                <div id="videoCount" class="counter-text">0/0</div>
+            </div>
+
+            <button id="reloadBtn" class="control-btn" aria-label="Reload Videos">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Bottom Overlay -->
+        <div class="bottom-overlay">
+            <div class="video-info">
+                <p id="videoTitle" class="video-title"></p>
+            </div>
+            <div class="progress-container">
+                <div class="time-display">
+                    <span id="currentTime">0:00</span>
+                    <span id="totalTime">0:00</span>
+                </div>
+                <div class="video-progress-bar">
+                    <div id="videoProgress" class="video-progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Swipe Indicator -->
+        <div id="swipeIndicator" class="swipe-indicator hidden">
+            <div class="swipe-arrow">↑</div>
+            <p>Swipe up for next video</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
